@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>تخصصي — اكتشف تخصصك الجامعي المناسب</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F7FB;
+    --surface:#FFFFFF;
+    --primary:#33418F;
+    --primary-dark:#232D66;
+    --primary-tint:#EEF0FA;
+    --accent:#128C87;
+    --accent-tint:#E4F5F3;
+    --text:#1D2233;
+    --text-muted:#666C82;
+    --border:#E4E6F1;
+    --danger:#B23A32;
+    --success:#1E8E5A;
+    --radius-lg:20px;
+    --radius-md:14px;
+    --radius-sm:10px;
+    --shadow:0 6px 24px rgba(35,45,102,0.08);
+    --maxw:640px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Cairo',system-ui,-apple-system,sans-serif;
+    overflow-x:hidden;
+    -webkit-tap-highlight-color:transparent;
+  }
+  #app{
+    max-width:var(--maxw);
+    margin:0 auto;
+    min-height:100vh;
+    background:var(--bg);
+    position:relative;
+    padding-bottom:32px;
+  }
+  a{color:inherit;}
+  button{
+    font-family:inherit;
+    cursor:pointer;
+    border:none;
+    outline:none;
+  }
+  button:focus-visible, [tabindex]:focus-visible{
+    outline:3px solid var(--accent);
+    outline-offset:2px;
+  }
+  h1,h2,h3,h4,p{margin:0;}
+  .container{padding:0 20px;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:15px 22px;
+    border-radius:var(--radius-md);
+    font-size:16px;
+    font-weight:700;
+    min-height:52px;
+    width:100%;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn:active{transform:scale(0.98);}
+  .btn-primary{background:var(--primary);color:#fff;box-shadow:0 8px 20px rgba(51,65,143,0.28);}
+  .btn-primary:hover{background:var(--primary-dark);}
+  .btn-accent{background:var(--accent);color:#fff;box-shadow:0 8px 20px rgba(18,140,135,0.25);}
+  .btn-outline{background:transparent;color:var(--primary);border:1.5px solid var(--border);}
+  .btn-outline:hover{border-color:var(--primary);}
+  .btn-ghost{background:transparent;color:var(--text-muted);width:auto;min-height:auto;padding:10px 6px;font-weight:600;}
+  .btn-sm{width:auto;padding:10px 16px;min-height:40px;font-size:14px;}
+  .btn[disabled]{opacity:0.4;pointer-events:none;}
+
+  /* ---------- HOME ---------- */
+  .hero{
+    padding:34px 20px 10px;
+    text-align:center;
+  }
+  .brand{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    font-weight:800;font-size:15px;color:var(--primary);
+    margin-bottom:22px;
+    letter-spacing:0;
+  }
+  .brand-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+  .hero-art{width:180px;height:130px;margin:0 auto 18px;}
+  .hero h1{
+    font-size:28px;
+    line-height:1.5;
+    font-weight:800;
+    color:var(--text);
+  }
+  .hero h1 span{color:var(--primary);}
+  .hero-sub{
+    margin-top:14px;
+    font-size:16px;
+    line-height:1.9;
+    color:var(--text-muted);
+    max-width:440px;
+    margin-inline:auto;
+  }
+  .feature-row{
+    display:flex;
+    gap:0;
+    margin:30px 20px 6px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+  }
+  .feature-item{
+    flex:1;
+    padding:18px 8px;
+    text-align:center;
+    border-inline-start:1px solid var(--border);
+  }
+  .feature-item:first-child{border-inline-start:none;}
+  .feature-item svg{width:22px;height:22px;color:var(--accent);margin-bottom:8px;}
+  .feature-item .f-num{font-weight:800;font-size:15px;color:var(--text);display:block;}
+  .feature-item .f-label{font-size:12px;color:var(--text-muted);display:block;margin-top:3px;line-height:1.4;}
+
+  .price-card{
+    margin:26px 20px 0;
+    background:linear-gradient(180deg,var(--primary) 0%, var(--primary-dark) 100%);
+    color:#fff;
+    border-radius:var(--radius-lg);
+    padding:26px 22px;
+    text-align:center;
+  }
+  .price-card .p-label{font-size:14px;opacity:0.85;font-weight:600;}
+  .price-card .p-amount{font-size:28px;font-weight:800;margin:8px 0 4px;}
+  .price-card .p-amount small{font-size:15px;font-weight:600;opacity:0.85;}
+  .price-card .p-promo-note{font-size:13px;font-weight:700;opacity:0.85;margin-bottom:18px;}
+
+  .resume-banner{
+    margin:18px 20px 0;
+    background:var(--accent-tint);
+    border:1px solid #BFE6E3;
+    border-radius:var(--radius-md);
+    padding:16px 18px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .resume-banner p{font-size:14px;color:var(--text);line-height:1.7;}
+  .resume-actions{display:flex;gap:10px;}
+  .resume-actions .btn{padding:10px 12px;min-height:42px;font-size:13.5px;}
+
+  .home-section{margin:38px 20px 0;}
+  .home-section h2{font-size:19px;font-weight:800;margin-bottom:6px;}
+  .home-section .sec-sub{font-size:14px;color:var(--text-muted);margin-bottom:16px;line-height:1.7;}
+  .axis-list{display:flex;flex-direction:column;gap:10px;}
+  .axis-row{
+    display:flex;align-items:center;gap:12px;
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius-md);padding:14px 16px;
+  }
+  .axis-row .a-icon{
+    width:38px;height:38px;flex:none;border-radius:10px;
+    background:var(--primary-tint);color:var(--primary);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .axis-row .a-icon svg{width:19px;height:19px;}
+  .axis-row .a-text b{display:block;font-size:14.5px;font-weight:700;}
+  .axis-row .a-text span{display:block;font-size:12.5px;color:var(--text-muted);margin-top:2px;}
+
+  .disclaimer{
+    margin:34px 20px 0;
+    font-size:12.5px;color:var(--text-muted);line-height:1.9;
+    background:var(--surface);border:1px dashed var(--border);
+    border-radius:var(--radius-md);padding:14px 16px;
+  }
+
+  .sticky-cta{
+    position:sticky; bottom:0; left:0; right:0;
+    background:linear-gradient(180deg, rgba(246,247,251,0) 0%, var(--bg) 35%);
+    padding:22px 20px 10px;
+    margin-top:18px;
+  }
+
+  /* ---------- PAYMENT ---------- */
+  .topbar{
+    display:flex;align-items:center;gap:12px;
+    padding:16px 20px;
+  }
+  .topbar .back-btn{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--surface);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;flex:none;
+  }
+  .topbar .back-btn svg{width:18px;height:18px;}
+  .topbar h3{font-size:16px;font-weight:700;}
+
+  .pay-card{
+    margin:10px 20px 0;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:22px;
+  }
+  .pay-badge{
+    display:inline-flex;align-items:center;gap:6px;
+    background:#FFF4E5;color:#8A5A00;
+    font-size:12.5px;font-weight:700;
+    padding:7px 12px;border-radius:100px;
+    margin-bottom:16px;
+  }
+  .pay-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);}
+  .pay-row:last-of-type{border-bottom:none;}
+  .pay-row span:first-child{color:var(--text-muted);font-size:14px;}
+  .pay-row span:last-child{font-weight:700;font-size:14px;}
+  .pay-total{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:14px;border-top:2px solid var(--border);}
+  .pay-total span:first-child{font-weight:700;}
+  .pay-total span:last-child{font-weight:800;font-size:20px;color:var(--primary);}
+  .pay-note{
+    margin:16px 20px 0;
+    font-size:12.5px;line-height:1.8;color:#8A5A00;
+    background:#FFF8EC;border:1px solid #F5E1B8;
+    border-radius:var(--radius-sm);padding:12px 14px;
+  }
+  .pay-actions{margin:20px 20px 0;display:flex;flex-direction:column;gap:10px;}
+
+  /* ---------- QUIZ ---------- */
+  .quiz-header{
+    position:sticky; top:0; z-index:5;
+    background:var(--bg);
+    padding:14px 20px 12px;
+  }
+  .quiz-header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .quiz-header-top .qh-count{font-size:13px;font-weight:700;color:var(--text-muted);}
+  .quiz-header-top .qh-section{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-tint);padding:5px 10px;border-radius:100px;}
+  .progress-track{width:100%;height:8px;background:var(--border);border-radius:100px;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:100px;transition:width .35s ease;}
+
+  .q-card{
+    margin:6px 20px 0;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:26px 20px 22px;
+  }
+  .q-text{font-size:18px;font-weight:700;line-height:1.8;text-align:center;margin-bottom:26px;}
+  .scale{display:flex;justify-content:space-between;gap:8px;margin-bottom:10px;}
+  .scale-btn{
+    flex:1;
+    aspect-ratio:1/1;
+    border-radius:50%;
+    border:2px solid var(--border);
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:16px;color:var(--text-muted);
+    transition:all .15s ease;
+  }
+  .scale-btn.selected{
+    background:var(--primary);
+    border-color:var(--primary);
+    color:#fff;
+    transform:scale(1.08);
+  }
+  .scale-labels{display:flex;justify-content:space-between;font-size:11.5px;color:var(--text-muted);padding:0 2px;line-height:1.5;}
+  .scale-labels span{max-width:80px;}
+  .scale-labels span:last-child{text-align:left;}
+
+  .quiz-nav{display:flex;gap:10px;margin:20px 20px 0;}
+  .quiz-nav .btn{width:auto;flex:1;}
+
+  /* ---------- RESULT ---------- */
+  .result-hero{padding:28px 20px 4px;text-align:center;}
+  .result-hero .r-eyebrow{font-size:13px;font-weight:700;color:var(--accent);}
+  .result-hero h2{font-size:22px;font-weight:800;margin-top:8px;line-height:1.6;}
+
+  .match-card{
+    margin:20px 20px 0;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .match-top{
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+    color:#fff;
+    padding:24px 22px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .match-ring{
+    width:74px;height:74px;border-radius:50%;
+    background:rgba(255,255,255,0.14);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    flex:none;
+    border:2px solid rgba(255,255,255,0.35);
+  }
+  .match-ring b{font-size:19px;font-weight:800;}
+  .match-ring span{font-size:9.5px;opacity:.85;}
+  .match-top h3{font-size:19px;font-weight:800;}
+  .match-top .match-band{font-size:13px;opacity:.9;margin-top:4px;}
+  .match-top .match-cat{
+    display:inline-block;margin-top:8px;font-size:11.5px;font-weight:700;
+    background:rgba(255,255,255,0.18);padding:4px 10px;border-radius:100px;
+  }
+
+  .match-body{padding:20px 22px 22px;}
+  .match-desc{font-size:14.5px;line-height:1.9;color:var(--text-muted);margin-bottom:18px;}
+
+  .m-block{margin-bottom:18px;}
+  .m-block h4{
+    font-size:14px;font-weight:800;margin-bottom:10px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .m-block h4 svg{width:16px;height:16px;color:var(--accent);flex:none;}
+  .m-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;}
+  .m-list li{
+    font-size:13.5px;line-height:1.7;color:var(--text);
+    padding-inline-start:18px;position:relative;
+  }
+  .m-list li::before{
+    content:"";position:absolute;right:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--accent);
+  }
+  .m-list.warn li::before{background:#D8912B;}
+  .m-list.warn li{color:var(--text-muted);}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    font-size:12.5px;font-weight:600;background:var(--primary-tint);color:var(--primary);
+    padding:7px 12px;border-radius:100px;
+  }
+  .study-focus-box{
+    background:var(--bg);border-radius:var(--radius-sm);padding:12px 14px;
+    font-size:13.5px;color:var(--text-muted);line-height:1.8;
+  }
+
+  .other-majors{margin:28px 20px 0;}
+  .other-majors h3{font-size:16.5px;font-weight:800;margin-bottom:14px;}
+  .minor-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);
+    padding:16px 16px;margin-bottom:10px;
+    display:flex;align-items:center;gap:14px;
+  }
+  .minor-rank{
+    width:34px;height:34px;border-radius:50%;background:var(--primary-tint);color:var(--primary);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex:none;
+  }
+  .minor-info{flex:1;min-width:0;}
+  .minor-info b{font-size:14.5px;font-weight:700;display:block;}
+  .minor-info span{font-size:12px;color:var(--text-muted);display:block;margin-top:2px;}
+  .minor-pct{font-weight:800;color:var(--accent);font-size:15px;flex:none;}
+
+  .compare-section{margin:30px 20px 0;}
+  .compare-section h3{font-size:16.5px;font-weight:800;}
+  .compare-section .cs-sub{font-size:13px;color:var(--text-muted);margin-top:5px;margin-bottom:16px;line-height:1.7;}
+  .compare-head{display:flex;gap:10px;margin-bottom:12px;}
+  .compare-head .ch-item{
+    flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);
+    padding:14px 10px;text-align:center;
+  }
+  .compare-head .ch-item b{display:block;font-size:13.5px;font-weight:700;}
+  .compare-head .ch-item span{display:block;font-size:11.5px;color:var(--accent);font-weight:700;margin-top:4px;}
+  .compare-table{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;
+  }
+  .ct-row{display:flex;border-bottom:1px solid var(--border);}
+  .ct-row:last-child{border-bottom:none;}
+  .ct-label{
+    width:96px;flex:none;padding:12px 10px;font-size:12px;font-weight:700;color:var(--text-muted);
+    background:var(--bg);display:flex;align-items:center;
+  }
+  .ct-val{flex:1;padding:12px 10px;font-size:12.5px;line-height:1.6;display:flex;align-items:center;border-inline-start:1px solid var(--border);}
+
+  .result-actions{margin:32px 20px 0;display:flex;flex-direction:column;gap:10px;}
+
+  /* misc */
+  .footer-note{text-align:center;font-size:11.5px;color:var(--text-muted);margin:30px 20px 10px;line-height:1.8;}
+  .screen-fade{animation:fadeIn .28s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  @media (max-width:360px){
+    .hero h1{font-size:24px;}
+    .q-text{font-size:16.5px;}
+    .scale-btn{font-size:14px;}
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* =========================================================================
+   تخصصي — Takhassusi
+   تطبيق ويب من صفحة واحدة (بدون أي أدوات بناء) لمساعدة الطلاب على اكتشاف
+   التخصص الجامعي الأنسب لهم عبر اختبار متعدد الأبعاد.
+
+   ملاحظة هندسية: نظام الدفع الحالي (mockPay) هو نظام دفع تجريبي 100% لأغراض
+   التطوير فقط، ولا يوجد أي خصم حقيقي. عند ربط بوابة دفع حقيقية لاحقًا، الاستبدال
+   يكون فقط داخل دالة mockPay() ودالة verifyPayment() دون الحاجة لتغيير أي شيء
+   آخر في التطبيق.
+   ========================================================================= */
+
+/* ----------------------------- الأبعاد (Dimensions) ----------------------------- */
+const DIMENSIONS = {
+  analytical:      "التحليل المنطقي",
+  creative:        "الإبداع",
+  technical:       "التقنية والحوسبة",
+  scientific:      "العلوم الطبيعية",
+  mathematical:    "الرياضيات",
+  humanitarian:    "الجانب الإنساني",
+  communication:   "التواصل والتعبير",
+  leadership:      "القيادة",
+  business:        "الأعمال وريادة المشاريع",
+  detailOriented:  "الدقة والانتباه للتفاصيل",
+  practical:       "الجانب العملي التطبيقي",
+  language:        "اللغة والكتابة",
+  caregiving:      "الرعاية ومساعدة الآخرين",
+  problemSolving:  "حل المشكلات",
+  criticalThinking:"التفكير النقدي"
+};
+
+/* ----------------------------- الأسئلة (48 سؤالًا) ----------------------------- */
+// كل سؤال: مقياس من 1 إلى 5 (1: لا أوافق إطلاقًا ... 5: أوافق تمامًا)
+// dims: الأبعاد التي يقيسها السؤال مع وزن كل بُعد
+// trait (اختياري): سمة شخصية عرضية تُستخدم فقط في "لمحة شخصية" ولا تدخل في ترشيح التخصصات
+const QUESTIONS = [
+  // -------- المحور 1: الميول والاهتمامات --------
+  {id:1,  section:"الميول والاهتمامات", text:"أستمتع بتجربة أشياء جديدة أكتشف من خلالها اهتماماتي الحقيقية.", dims:{creative:1, practical:1}},
+  {id:2,  section:"الميول والاهتمامات", text:"أحب البحث عن إجابات لأسئلة تشغل بالي حتى لو لم يطلبها مني أحد.", dims:{analytical:2, scientific:1}},
+  {id:3,  section:"الميول والاهتمامات", text:"أنجذب إلى المجالات التي تتعلق بمساعدة الناس وتحسين حياتهم.", dims:{humanitarian:2, caregiving:1}},
+  {id:4,  section:"الميول والاهتمامات", text:"أستمتع بمتابعة أخبار التقنية والتطبيقات والاختراعات الجديدة.", dims:{technical:2}},
+  {id:5,  section:"الميول والاهتمامات", text:"تستهويني فكرة الأعمال التجارية وامتلاك مشروعي الخاص مستقبلًا.", dims:{business:2, leadership:1}},
+  {id:6,  section:"الميول والاهتمامات", text:"أحب القراءة والكتابة والتعبير عن أفكاري بالكلمات.", dims:{language:2, communication:1}},
+  {id:7,  section:"الميول والاهتمامات", text:"أستمتع بحل الألغاز والمشكلات المعقدة التي تحتاج تفكيرًا عميقًا.", dims:{problemSolving:2, analytical:1}},
+  {id:8,  section:"الميول والاهتمامات", text:"أنجذب إلى الأعمال الفنية والتصميم والجماليات البصرية.", dims:{creative:2}},
+
+  // -------- المحور 2: طريقة التفكير --------
+  {id:9,  section:"طريقة التفكير", text:"أفضّل اتخاذ القرارات بناءً على معطيات ومنطق واضح لا على الحدس فقط.", dims:{analytical:2, criticalThinking:1}},
+  {id:10, section:"طريقة التفكير", text:"أستمتع بالتفكير خارج الصندوق وإيجاد حلول غير تقليدية للمشكلات.", dims:{creative:2}},
+  {id:11, section:"طريقة التفكير", text:"أحب تفكيك المشكلة إلى أجزاء صغيرة لفهمها بشكل أعمق قبل حلها.", dims:{analytical:1, problemSolving:2}},
+  {id:12, section:"طريقة التفكير", text:"أراجع المعلومات وأتساءل عن مصداقيتها قبل تصديقها مباشرة.", dims:{criticalThinking:2}},
+  {id:13, section:"طريقة التفكير", text:"أشعر بالرضا عندما أنجز مهمة تحتاج دقة عالية دون أي أخطاء.", dims:{detailOriented:2}},
+  {id:14, section:"طريقة التفكير", text:"أستطيع اتخاذ قرار سريع تحت الضغط دون تردد كبير.", dims:{leadership:1, practical:1}},
+  {id:15, section:"طريقة التفكير", text:"أحب فهم السبب وراء الأشياء أكثر من مجرد حفظها كما هي.", dims:{scientific:1, criticalThinking:1}},
+
+  // -------- المحور 3: القدرات الدراسية --------
+  {id:16, section:"القدرات الدراسية", text:"مادة الرياضيات من المواد التي أتفوق فيها أو أشعر بارتياح تجاهها.", dims:{mathematical:2}},
+  {id:17, section:"القدرات الدراسية", text:"أفهم مفاهيم الفيزياء والقوانين الطبيعية بسهولة نسبية.", dims:{scientific:2, mathematical:1}},
+  {id:18, section:"القدرات الدراسية", text:"مادة الأحياء وعلوم الكائنات الحية والجسم البشري تثير اهتمامي.", dims:{scientific:2, caregiving:1}},
+  {id:19, section:"القدرات الدراسية", text:"أتعامل مع التفاعلات والمعادلات الكيميائية بشكل جيد.", dims:{scientific:1, detailOriented:1}},
+  {id:20, section:"القدرات الدراسية", text:"أتعلّم اللغات الجديدة بسرعة نسبية وأستمتع بذلك.", dims:{language:2}},
+  {id:21, section:"القدرات الدراسية", text:"الكتابة الإبداعية أو الأكاديمية أمر أجيده وأستمتع بممارسته.", dims:{language:2, creative:1}},
+  {id:22, section:"القدرات الدراسية", text:"أحفظ المعلومات وأستوعب النصوص الطويلة بسهولة نسبية.", dims:{detailOriented:1, language:1}},
+  {id:23, section:"القدرات الدراسية", text:"التعامل مع الأرقام والإحصائيات والجداول أمر يريحني.", dims:{mathematical:2, analytical:1}},
+
+  // -------- المحور 4: الشخصية --------
+  {id:24, section:"الشخصية", text:"أفضّل العمل ضمن فريق على العمل بمفردي في أغلب الأحيان.", dims:{communication:1}, trait:"teamwork", traitHigh:"العمل الجماعي", traitLow:"العمل الفردي المستقل"},
+  {id:25, section:"الشخصية", text:"أفضّل الاستقرار في نمط عمل ثابت على التنوع والتغيير المستمر.", dims:{}, trait:"stability", traitHigh:"الاستقرار والروتين الواضح", traitLow:"التنوع وكسر الروتين"},
+  {id:26, section:"الشخصية", text:"أجد نفسي أتولى القيادة بشكل طبيعي عند العمل ضمن مجموعة.", dims:{leadership:2}},
+  {id:27, section:"الشخصية", text:"أستمتع بالتحديات الصعبة أكثر من المهام السهلة والمريحة.", dims:{problemSolving:1}},
+  {id:28, section:"الشخصية", text:"أفضّل بيئة عمل هادئة ومنظمة على بيئة سريعة الإيقاع ومتغيرة.", dims:{}, trait:"pace", traitHigh:"بيئة هادئة ومنظمة", traitLow:"بيئة سريعة ومتغيرة"},
+  {id:29, section:"الشخصية", text:"أشعر برضا حقيقي عندما أساعد شخصًا يمر بصعوبة أو مشكلة.", dims:{caregiving:2, humanitarian:1}},
+  {id:30, section:"الشخصية", text:"أتحمّل المسؤولية الكاملة عن أخطائي وأتعلّم منها بدل تبريرها.", dims:{detailOriented:1}},
+
+  // -------- المحور 5: طبيعة العمل المستقبلية --------
+  {id:31, section:"طبيعة العمل المستقبلية", text:"أفضّل العمل الميداني والتنقل على الجلوس المستمر خلف مكتب.", dims:{practical:1}, trait:"fieldwork", traitHigh:"العمل الميداني والتنقل", traitLow:"العمل المكتبي الثابت"},
+  {id:32, section:"طبيعة العمل المستقبلية", text:"أفضّل التعامل مع الحاسوب والأنظمة على التعامل المباشر مع الناس طوال الوقت.", dims:{technical:2}},
+  {id:33, section:"طبيعة العمل المستقبلية", text:"أفضّل وظيفة روتينية مستقرة على بيئة عمل متغيرة باستمرار.", dims:{}, trait:"routine", traitHigh:"الاستقرار الوظيفي", traitLow:"تنوّع المهام باستمرار"},
+  {id:34, section:"طبيعة العمل المستقبلية", text:"أفضّل فكرة إنشاء مشروعي الخاص على الالتزام بوظيفة ثابتة في شركة.", dims:{business:2, leadership:1}},
+  {id:35, section:"طبيعة العمل المستقبلية", text:"أفضّل عملًا يخدم الناس بشكل مباشر على عمل تقني بحت خلف الكواليس.", dims:{humanitarian:2}},
+  {id:36, section:"طبيعة العمل المستقبلية", text:"أفضّل عملًا يتطلب دقة عالية جدًا على عمل يعتمد على كمية كبيرة من الأفكار السريعة.", dims:{detailOriented:2}},
+
+  // -------- المحور 6: التقنية والبرمجة --------
+  {id:37, section:"التقنية والبرمجة", text:"أستمتع بمعرفة كيف تعمل التطبيقات والمواقع الإلكترونية من الداخل.", dims:{technical:2}},
+  {id:38, section:"التقنية والبرمجة", text:"أشعر بإنجاز حقيقي عند حل مشكلة تقنية بنفسي دون مساعدة أحد.", dims:{technical:2, problemSolving:1}},
+  {id:39, section:"التقنية والبرمجة", text:"تثيرني فكرة بناء منتج رقمي أو تطبيق من الصفر.", dims:{technical:2, creative:1}},
+  {id:40, section:"التقنية والبرمجة", text:"أستطيع الجلوس فترة طويلة نسبيًا للتركيز على مشكلة تحتاج انتباهًا دقيقًا.", dims:{detailOriented:1, technical:1}},
+  {id:41, section:"التقنية والبرمجة", text:"تستهويني مجالات البرمجة والذكاء الاصطناعي وأتابع تطوراتها باستمرار.", dims:{technical:2, scientific:1}},
+  {id:42, section:"التقنية والبرمجة", text:"أستمتع باكتشاف سبب وجود خطأ في نظام أو جهاز والعمل على إصلاحه.", dims:{technical:2, problemSolving:2}},
+  {id:43, section:"التقنية والبرمجة", text:"أفضّل إنشاء منتج رقمي بنفسي على الاكتفاء باستخدام منتجات الآخرين فقط.", dims:{technical:1, creative:1}},
+  {id:44, section:"التقنية والبرمجة", text:"أهتم بحماية الأنظمة والبيانات من الاختراق بقدر اهتمامي ببناء البرامج نفسها.", dims:{detailOriented:2, analytical:1}},
+
+  // -------- المحور 7: إضافي (تواصل / أعمال / إنساني) --------
+  {id:45, section:"محاور إضافية", text:"أستطيع إقناع الآخرين بأفكاري ووجهة نظري بسهولة نسبية.", dims:{communication:2, leadership:1}},
+  {id:46, section:"محاور إضافية", text:"أهتم بمتابعة الأخبار الاقتصادية والتجارية وأفهم كيف تُدار الشركات.", dims:{business:2}},
+  {id:47, section:"محاور إضافية", text:"أحب التحدث أمام الجمهور أو تقديم أفكاري بشكل مباشر للآخرين.", dims:{communication:2}},
+  {id:48, section:"محاور إضافية", text:"أشعر بفضول حقيقي تجاه سلوك الناس ودوافعهم النفسية.", dims:{humanitarian:1, criticalThinking:1}}
+];
+
+const SCALE_LABELS = ["لا أوافق إطلاقًا","لا أوافق","محايد","أوافق","أوافق تمامًا"];
+
+// عرض ترويجي: الاختبار مجاني حاليًا لفترة محدودة. لإعادة تفعيل الدفع مستقبلًا،
+// اجعل هذه القيمة false فقط — بقية بنية الدفع التجريبي (mockPay) جاهزة ولم تُحذف.
+const FREE_PROMOTION = true;
+
+/* ----------------------------- بيانات التخصصات ----------------------------- */
+// كل الأوزان والمعلومات هنا قابلة للتعديل بحرية دون المساس بمنطق التطبيق.
+// التقييمات (programming / math / projects...) هي تقديرات إرشادية عامة فقط.
+const MAJORS = [
+  {
+    id:"cs", name:"علوم الحاسوب", category:"تقنية",
+    shortDescription:"دراسة الأسس النظرية والرياضية للحوسبة وبناء الخوارزميات وهياكل البيانات.",
+    description:"يركّز هذا التخصص على فهم الأسس العميقة لكيفية عمل الحاسوب: كيف تُحل المشكلات بخوارزميات فعّالة، وكيف تُنظَّم البيانات، وكيف تُبنى الأنظمة من الداخل. مزيج من التفكير الرياضي والمنطقي.",
+    dimensions:{technical:5, analytical:5, mathematical:4, problemSolving:4, creative:2},
+    strengths:["تفكير منطقي وتحليلي قوي","القدرة على حل المشكلات المعقدة خطوة بخطوة","فضول لفهم كيفية عمل الأنظمة من الداخل"],
+    studyFocus:"خوارزميات، هياكل بيانات، لغات برمجة متعددة، أنظمة تشغيل، رياضيات منفصلة ومتقدمة.",
+    careerExamples:["مهندس برمجيات","محلل بيانات","باحث في علوم الحاسوب","مطور أنظمة"],
+    warnings:["يتطلب أساسًا رياضيًا لا بأس به خصوصًا في السنوات الأولى","تخصص نظري أكاديمي أكثر من هندسة البرمجيات في بعض الجامعات"],
+    relatedMajors:["softwareEng","aiEng","it"],
+    compare:{study:"نظري وتطبيقي بنسب متقاربة مع تركيز على الأسس", focus:"الخوارزميات والمنطق الحاسوبي", programming:"مرتفع", math:"مرتفع", projects:"متوسط إلى مرتفع", workNature:"مكتبي غالبًا، عمل ذهني مركّز"}
+  },
+  {
+    id:"it", name:"تقنية المعلومات", category:"تقنية",
+    shortDescription:"إدارة وتشغيل البنية التقنية للمؤسسات: شبكات، أنظمة، دعم فني، وحلول تقنية عملية.",
+    description:"تخصص عملي أقرب إلى تشغيل التقنية وصيانتها من بنائها النظري: كيف تُدار الشبكات، وتُؤمَّن الأنظمة، وتُحل المشكلات التقنية اليومية للمستخدمين والمؤسسات.",
+    dimensions:{technical:4, practical:4, detailOriented:3, problemSolving:3, communication:2},
+    strengths:["حل المشاكل التقنية اليومية بسرعة","التعامل العملي المباشر مع الأنظمة والشبكات","صبر في التعامل مع أعطال متكررة"],
+    studyFocus:"شبكات الحاسوب، أنظمة التشغيل، قواعد البيانات، إدارة الأنظمة، أساسيات أمن المعلومات.",
+    careerExamples:["مسؤول أنظمة","مهندس شبكات","أخصائي دعم فني","مدير بنية تحتية تقنية"],
+    warnings:["أقل تركيزًا على البرمجة العميقة مقارنة بعلوم الحاسوب","يحتاج صبرًا في التعامل مع مشاكل متكررة ومستخدمين مختلفين"],
+    relatedMajors:["cs","cybersecurity","telecomEng"],
+    compare:{study:"تطبيقي أكثر منه نظري", focus:"تشغيل وصيانة الأنظمة التقنية", programming:"متوسط", math:"منخفض إلى متوسط", projects:"متوسط", workNature:"مكتبي مع تدخل ميداني أحيانًا"}
+  },
+  {
+    id:"softwareEng", name:"هندسة البرمجيات", category:"تقنية",
+    shortDescription:"تصميم وبناء البرمجيات والتطبيقات بمنهجية هندسية منظمة من الفكرة حتى الإطلاق.",
+    description:"يجمع هذا التخصص بين الإبداع والمنطق الهندسي: كيف تُصمَّم منتجات برمجية كاملة، تُدار مشاريعها، وتُبنى ضمن فريق عمل بمعايير جودة واضحة.",
+    dimensions:{technical:5, creative:4, analytical:4, problemSolving:4, detailOriented:2},
+    strengths:["الجمع بين الإبداع والمنطق التقني","بناء منتجات متكاملة من الفكرة إلى التنفيذ","الراحة في العمل ضمن فرق تطوير"],
+    studyFocus:"هندسة البرمجيات، تصميم الأنظمة، إدارة المشاريع التقنية، ممارسة برمجية مكثفة.",
+    careerExamples:["مطور تطبيقات","مهندس Full-stack","مهندس DevOps","قائد فريق تقني"],
+    warnings:["يتطلب ممارسة برمجية مستمرة خارج قاعة الدرس","سوق العمل تنافسي ويحتاج بناء مشاريع فعلية مبكرًا"],
+    relatedMajors:["cs","aiEng","it"],
+    compare:{study:"تطبيقي بشكل كبير مع مشاريع عملية مستمرة", focus:"بناء البرمجيات وتطويرها", programming:"مرتفع جدًا", math:"متوسط", projects:"مرتفع جدًا", workNature:"مكتبي، عمل جماعي على مشاريع"}
+  },
+  {
+    id:"aiEng", name:"هندسة الذكاء الاصطناعي", category:"تقنية",
+    shortDescription:"تصميم أنظمة قادرة على التعلّم واتخاذ القرار باستخدام الرياضيات المتقدمة والبرمجة.",
+    description:"تخصص يجمع بين الرياضيات العميقة والبرمجة المتقدمة والفضول العلمي: كيف تُبنى نماذج تتعلّم من البيانات وتتخذ قرارات، ولماذا تعمل بهذه الطريقة.",
+    dimensions:{technical:5, analytical:5, mathematical:5, scientific:4, problemSolving:4},
+    strengths:["قدرة رياضية وتحليلية عالية","فضول علمي تجاه كيفية «تفكير» الآلة","صبر على التجربة والخطأ المتكرر"],
+    studyFocus:"احتمالات وإحصاء، تعلّم آلي، شبكات عصبية، جبر خطي، برمجة متقدمة.",
+    careerExamples:["مهندس تعلّم آلي","باحث ذكاء اصطناعي","مهندس بيانات","مطوّر أنظمة ذكية"],
+    warnings:["من أكثر التخصصات التقنية تطلّبًا للرياضيات","مجال يتطور بسرعة كبيرة ويحتاج تعلّمًا مستمرًا مدى الحياة"],
+    relatedMajors:["cs","softwareEng","cybersecurity"],
+    compare:{study:"نظري رياضي إلى جانب تطبيق متقدم", focus:"الخوارزميات الذكية والتعلّم الآلي", programming:"مرتفع", math:"مرتفع جدًا", projects:"مرتفع", workNature:"مكتبي، بحثي وتحليلي بشكل كبير"}
+  },
+  {
+    id:"cybersecurity", name:"الأمن السيبراني", category:"تقنية",
+    shortDescription:"حماية الأنظمة والبيانات من الاختراق والتهديدات الرقمية المختلفة.",
+    description:"يتطلب هذا التخصص عقلية مزدوجة: فهم كيف تُبنى الأنظمة، وفهم كيف يمكن اختراقها، مع دقة عالية جدًا في تتبع التفاصيل الصغيرة التي قد تُشكّل ثغرة.",
+    dimensions:{technical:5, analytical:5, detailOriented:5, problemSolving:4},
+    strengths:["دقة عالية وانتباه شديد للتفاصيل","القدرة على التفكير من زاوية المهاجم لاكتشاف الثغرات","صبر في تتبع مشاكل معقدة"],
+    studyFocus:"أمن الشبكات، التشفير، اختبار الاختراق الأخلاقي، الاستجابة للحوادث الأمنية.",
+    careerExamples:["محلل أمن معلومات","مختبر اختراق أخلاقي","مسؤول حماية بيانات","مستشار أمني"],
+    warnings:["يحتاج التزامًا بالتحديث المستمر لمواكبة تهديدات جديدة باستمرار","المسؤولية عالية لأن الأخطاء هنا قد تكون مكلفة فعليًا"],
+    relatedMajors:["it","cs","softwareEng"],
+    compare:{study:"تطبيقي تقني مع تخصص أمني دقيق", focus:"حماية الأنظمة واكتشاف الثغرات", programming:"متوسط إلى مرتفع", math:"متوسط", projects:"مرتفع", workNature:"مكتبي، يقظة مستمرة وتتبع دقيق"}
+  },
+  {
+    id:"telecomEng", name:"هندسة الاتصالات", category:"هندسة",
+    shortDescription:"تصميم وتشغيل شبكات وأنظمة الاتصالات التي تنقل البيانات والصوت.",
+    description:"دراسة كيف تنتقل المعلومات عبر الشبكات السلكية واللاسلكية، من الأبراج والألياف الضوئية إلى بروتوكولات نقل البيانات الحديثة.",
+    dimensions:{technical:4, mathematical:4, scientific:3, detailOriented:3, problemSolving:3},
+    strengths:["فهم جيد للأنظمة الكهربائية والموجات","تفكير هندسي دقيق ومنظم","اهتمام ببنية الاتصالات التحتية"],
+    studyFocus:"دوائر كهربائية، معالجة الإشارات، شبكات اتصال، أنظمة لاسلكية.",
+    careerExamples:["مهندس شبكات اتصالات","مهندس أنظمة لاسلكية","مسؤول بنية تحتية للاتصالات"],
+    warnings:["يتطلب أساسًا قويًا في الفيزياء والرياضيات","جزء كبير من الدراسة نظري هندسي قبل الجانب التطبيقي"],
+    relatedMajors:["electricalEng","it","cybersecurity"],
+    compare:{study:"هندسي نظري مع تطبيقات عملية", focus:"أنظمة نقل البيانات والاتصالات", programming:"متوسط", math:"مرتفع", projects:"متوسط", workNature:"مزيج بين المكتب والميدان"}
+  },
+  {
+    id:"civilEng", name:"الهندسة المدنية", category:"هندسة",
+    shortDescription:"تصميم وتنفيذ المباني والبنية التحتية كالطرق والجسور والمنشآت.",
+    description:"يجمع هذا التخصص بين الحسابات الدقيقة والتصور المكاني للمشاريع الكبيرة: كيف تُصمَّم منشأة آمنة، وكيف تُدار عملية بنائها من الأساس حتى التسليم.",
+    dimensions:{mathematical:4, scientific:3, detailOriented:4, practical:4, analytical:3},
+    strengths:["دقة عالية في الحسابات الإنشائية","القدرة على تصور المشاريع الكبيرة قبل تنفيذها","إحساس بالمسؤولية تجاه سلامة المستخدمين"],
+    studyFocus:"مقاومة المواد، الإنشاءات، الهندسة الجيوتقنية، إدارة المشاريع الهندسية.",
+    careerExamples:["مهندس مدني","مشرف مشاريع إنشائية","مهندس تصميم إنشائي"],
+    warnings:["يحتاج عملًا ميدانيًا وزيارات مواقع بجانب العمل المكتبي","المسؤولية القانونية والسلامة فيه عالية جدًا"],
+    relatedMajors:["architecture","electricalEng"],
+    compare:{study:"تطبيقي هندسي مع حسابات دقيقة", focus:"تصميم وتنفيذ المنشآت", programming:"منخفض", math:"مرتفع", projects:"مرتفع", workNature:"مزيج بين المكتب والموقع الميداني"}
+  },
+  {
+    id:"electricalEng", name:"الهندسة الكهربائية", category:"هندسة",
+    shortDescription:"دراسة الأنظمة الكهربائية من توليد الطاقة إلى الدوائر الإلكترونية الدقيقة.",
+    description:"من محطات توليد الطاقة إلى أدق الدوائر الإلكترونية، يدرس هذا التخصص كيف تُنتَج الكهرباء وتُنقل وتُستخدم في كل شيء تقريبًا حولنا.",
+    dimensions:{mathematical:4, scientific:4, technical:3, detailOriented:3, problemSolving:3},
+    strengths:["فهم عميق للفيزياء والرياضيات","دقة في التعامل مع الدوائر والأنظمة","قدرة جيدة على تشخيص الأعطال"],
+    studyFocus:"دوائر كهربائية، إلكترونيات، أنظمة قوى كهربائية، تحكّم آلي.",
+    careerExamples:["مهندس كهربائي","مهندس صيانة أنظمة","مصمم دوائر إلكترونية"],
+    warnings:["يتطلب فيزياء ورياضيات متقدمة طوال سنوات الدراسة","بعض التخصصات الفرعية تحتاج عملًا ميدانيًا مستمرًا"],
+    relatedMajors:["telecomEng","civilEng"],
+    compare:{study:"هندسي نظري مع مختبرات عملية", focus:"الأنظمة والدوائر الكهربائية", programming:"منخفض إلى متوسط", math:"مرتفع", projects:"متوسط", workNature:"مزيج بين المكتب والمصنع أو الموقع"}
+  },
+  {
+    id:"medicine", name:"الطب البشري", category:"طبي",
+    shortDescription:"دراسة جسم الإنسان وتشخيص وعلاج الأمراض لرعاية صحة المرضى.",
+    description:"مسار طويل يجمع بين حب العلم العميق لجسم الإنسان، والرغبة الحقيقية في مساعدة المرضى، مع قدرة على اتخاذ قرارات دقيقة تحت ضغط.",
+    dimensions:{scientific:5, caregiving:5, detailOriented:4, humanitarian:4, problemSolving:3},
+    strengths:["رغبة حقيقية في مساعدة المرضى","القدرة على تحمّل ضغط نفسي وجسدي عالٍ","دقة في التشخيص واتخاذ القرار"],
+    studyFocus:"تشريح، فسيولوجيا، علم الأمراض، تدريب سريري طويل داخل المستشفيات.",
+    careerExamples:["طبيب عام","طبيب مختص","جرّاح","باحث طبي"],
+    warnings:["مدة الدراسة طويلة وتتطلب التزامًا كبيرًا لسنوات متتالية","ضغط نفسي مستمر بسبب التعامل مع حياة المرضى وصحتهم"],
+    relatedMajors:["dentistry","pharmacy","nursing"],
+    compare:{study:"طويل، أكاديمي وسريري مكثف", focus:"تشخيص وعلاج الأمراض", programming:"منخفض", math:"متوسط", projects:"مرتفع (تدريب سريري)", workNature:"ميداني في المستشفيات والعيادات"}
+  },
+  {
+    id:"dentistry", name:"طب الأسنان", category:"طبي",
+    shortDescription:"تشخيص وعلاج مشاكل الأسنان والفم والحفاظ على صحتهما.",
+    description:"تخصص طبي عملي بدرجة عالية، يعتمد على مهارة يدوية دقيقة إلى جانب المعرفة العلمية، مع تعامل مباشر ومستمر مع المرضى.",
+    dimensions:{scientific:4, caregiving:4, detailOriented:5, practical:3},
+    strengths:["مهارة يدوية دقيقة","صبر في العمل التفصيلي الدقيق","رغبة في مساعدة الناس بشكل مباشر وسريع"],
+    studyFocus:"تشريح الفم والأسنان، جراحة الفم، تعويضات سنية، تدريب عملي مكثف.",
+    careerExamples:["طبيب أسنان عام","أخصائي تقويم أسنان","جرّاح فم وأسنان"],
+    warnings:["يتطلب مهارة يدوية دقيقة وليس فقط معرفة نظرية","العمل يتطلب وقوفًا طويلًا وتركيزًا بدنيًا مستمرًا"],
+    relatedMajors:["medicine","pharmacy"],
+    compare:{study:"عملي ونظري مع تدريب يدوي مكثف", focus:"صحة الفم والأسنان", programming:"منخفض", math:"منخفض إلى متوسط", projects:"مرتفع (عملي)", workNature:"عيادي، عمل يدوي دقيق"}
+  },
+  {
+    id:"pharmacy", name:"الصيدلة", category:"طبي",
+    shortDescription:"دراسة الأدوية وتأثيراتها وكيفية استخدامها الآمن لعلاج المرضى.",
+    description:"يجمع بين الكيمياء والعلوم الحيوية بدقة عالية جدًا، لأن أي خطأ في فهم جرعة أو تفاعل دوائي قد يؤثر مباشرة على سلامة المريض.",
+    dimensions:{scientific:5, detailOriented:4, caregiving:3, analytical:3},
+    strengths:["دقة عالية في التعامل مع الجرعات والتفاعلات الدوائية","حب الكيمياء والعلوم الحيوية","إحساس عالٍ بالمسؤولية تجاه سلامة المريض"],
+    studyFocus:"كيمياء دوائية، علم الأدوية، تفاعلات دوائية، صيدلة سريرية.",
+    careerExamples:["صيدلي في صيدلية","صيدلي مستشفى","باحث في تطوير الأدوية"],
+    warnings:["يحتاج حفظًا كثيفًا لتفاصيل كيميائية ودوائية دقيقة","الدقة هنا مسألة سلامة مريض لا مجرد تفضيل شخصي"],
+    relatedMajors:["medicine","dentistry"],
+    compare:{study:"نظري كيميائي مع تدريب عملي في الصيدليات", focus:"الأدوية وتأثيراتها العلاجية", programming:"منخفض", math:"متوسط", projects:"متوسط", workNature:"عيادي أو صيدلاني، تعامل مباشر مع المرضى"}
+  },
+  {
+    id:"nursing", name:"التمريض", category:"طبي",
+    shortDescription:"تقديم الرعاية الصحية المباشرة والمستمرة للمرضى بالتعاون مع الفريق الطبي.",
+    description:"تخصص عملي بامتياز، يقوم على التعاطف والصبر والقدرة على العمل بكفاءة في مواقف طارئة، مع تواصل إنساني مباشر ومستمر مع المرضى وذويهم.",
+    dimensions:{caregiving:5, humanitarian:4, practical:3, detailOriented:3, communication:2},
+    strengths:["قدرة عالية على التعاطف والصبر","العمل الجيد تحت الضغط في المواقف الطارئة","مهارة عملية قوية في تقديم الرعاية المباشرة"],
+    studyFocus:"أساسيات التمريض، رعاية المرضى، إسعافات أولية وطوارئ، تدريب سريري مبكر.",
+    careerExamples:["ممرض/ة في مستشفى","ممرض/ة رعاية طارئة","ممرض/ة صحة مجتمعية"],
+    warnings:["يتطلب تحمّل ضغط جسدي ونفسي في نوبات عمل طويلة","تعامل مباشر ومستمر مع الألم والمعاناة الإنسانية"],
+    relatedMajors:["medicine","psychology"],
+    compare:{study:"عملي بشكل كبير مع تدريب سريري مبكر", focus:"الرعاية المباشرة للمرضى", programming:"منخفض", math:"منخفض", projects:"مرتفع (تدريب عملي)", workNature:"ميداني داخل المستشفيات، تعامل مباشر ومستمر"}
+  },
+  {
+    id:"law", name:"القانون", category:"إنساني وقانوني",
+    shortDescription:"دراسة القوانين والأنظمة القضائية والدفاع عن الحقوق وتفسير النصوص القانونية.",
+    description:"يعتمد على قراءة وتحليل نصوص طويلة ومعقدة، وبناء حجج منطقية مقنعة، مع اهتمام حقيقي بمفاهيم العدالة وحل النزاعات بين الأطراف.",
+    dimensions:{criticalThinking:5, communication:4, analytical:3, language:3},
+    strengths:["قدرة على التحليل المنطقي للنصوص والحجج","مهارة إقناع وتعبير قوية","اهتمام بالعدالة وحل النزاعات"],
+    studyFocus:"القانون المدني والجنائي، القانون الدستوري، المرافعة والصياغة القانونية.",
+    careerExamples:["محامٍ","مستشار قانوني","باحث قانوني","قاضٍ (بعد مسار تدريبي إضافي)"],
+    warnings:["يتطلب حفظًا وقراءة نصوص طويلة ومعقدة باستمرار","النجاح المهني فيه يعتمد كثيرًا على مهارة التواصل لا الحفظ فقط"],
+    relatedMajors:["business","media"],
+    compare:{study:"نظري نصي بشكل كبير مع تدريب على المرافعة", focus:"تفسير وتطبيق القوانين", programming:"منخفض", math:"منخفض", projects:"متوسط (محاكاة قضايا)", workNature:"مكتبي ومحاكم، تواصل مباشر مستمر"}
+  },
+  {
+    id:"business", name:"إدارة الأعمال", category:"أعمال",
+    shortDescription:"دراسة إدارة المؤسسات والموارد والتسويق والمالية لتشغيل الأعمال بفعالية.",
+    description:"تخصص واسع يمنح فهمًا عامًا لكيف تُدار الشركات، وتُتخذ القرارات المالية والتسويقية، وكيف تنشأ فكرة مشروع وتتحول إلى عمل قائم فعليًا.",
+    dimensions:{business:5, leadership:4, communication:3, practical:2},
+    strengths:["فهم كيف تُدار الشركات وتُتخذ القرارات المالية","مهارة تواصل وتفاوض جيدة","رؤية جيدة لاكتشاف فرص الأعمال الجديدة"],
+    studyFocus:"إدارة عامة، تسويق، محاسبة أساسية، تمويل، ريادة أعمال.",
+    careerExamples:["مدير مشروع","مسؤول تسويق","رائد أعمال","محلل أعمال"],
+    warnings:["تخصص واسع يحتاج تحديد مسار فرعي واضح لاحقًا (تسويق، مالية، موارد بشرية...)","النجاح فيه يعتمد على المبادرة الشخصية بجانب الدراسة النظرية"],
+    relatedMajors:["law","media"],
+    compare:{study:"نظري تطبيقي متوازن مع دراسات حالة", focus:"إدارة الموارد واتخاذ القرار", programming:"منخفض", math:"متوسط", projects:"مرتفع (دراسات حالة ومشاريع)", workNature:"مكتبي، تفاعل اجتماعي مستمر"}
+  },
+  {
+    id:"psychology", name:"علم النفس", category:"إنساني",
+    shortDescription:"دراسة سلوك الإنسان وعملياته الذهنية والعاطفية وكيفية مساعدته نفسيًا.",
+    description:"يجمع بين الفضول العلمي تجاه سلوك الإنسان، والقدرة التحليلية لفهم الأنماط النفسية، مع رغبة حقيقية في الاستماع ومساعدة الآخرين.",
+    dimensions:{humanitarian:4, communication:3, analytical:3, caregiving:3, criticalThinking:2},
+    strengths:["فضول حقيقي تجاه دوافع سلوك الناس","قدرة استماع وتعاطف عالية","تفكير تحليلي في فهم الأنماط السلوكية"],
+    studyFocus:"علم النفس العام، نظريات الشخصية، الإحصاء النفسي، أساسيات العلاج والإرشاد.",
+    careerExamples:["أخصائي نفسي","مرشد تربوي","باحث سلوكي","أخصائي موارد بشرية"],
+    warnings:["يحتاج قراءة نظرية كثيفة قبل الوصول للتطبيق العملي","العمل الإكلينيكي المباشر يتطلب تدريبًا وترخيصًا إضافيًا لاحقًا"],
+    relatedMajors:["nursing","media"],
+    compare:{study:"نظري بحثي مع تدريب عملي محدود", focus:"فهم السلوك والعمليات الذهنية", programming:"منخفض", math:"متوسط (إحصاء)", projects:"متوسط", workNature:"مكتبي أو عيادي، تعامل مباشر مع الأفراد"}
+  },
+  {
+    id:"media", name:"الإعلام والصحافة", category:"إنساني",
+    shortDescription:"دراسة الإعلام والصحافة وصناعة المحتوى وطرق الوصول إلى الجمهور.",
+    description:"تخصص عملي وإبداعي في آن واحد: كيف تُصاغ قصة مؤثرة، وكيف يُنتج محتوى يصل فعليًا للجمهور، وكيف تُدار العلاقة بين المؤسسات والناس.",
+    dimensions:{communication:5, creative:4, language:3, business:1},
+    strengths:["مهارة تعبير وصياغة قوية","قدرة على رواية القصص بشكل مؤثر","فضول تجاه الأحداث والقضايا العامة"],
+    studyFocus:"صحافة، إعلام رقمي، كتابة إعلامية، إنتاج محتوى ومرئيات.",
+    careerExamples:["صحفي","صانع محتوى","منتج إعلامي","مسؤول علاقات عامة"],
+    warnings:["السوق تنافسي ويحتاج بناء ملف أعمال (Portfolio) مبكرًا","التخصص عملي أكثر مما يبدو نظريًا من الخارج"],
+    relatedMajors:["languages","business"],
+    compare:{study:"عملي إبداعي مع مشاريع محتوى مستمرة", focus:"صناعة ونشر المحتوى الإعلامي", programming:"منخفض", math:"منخفض", projects:"مرتفع", workNature:"مكتبي وميداني، تواصل مستمر مع الجمهور"}
+  },
+  {
+    id:"languages", name:"اللغات والترجمة", category:"إنساني",
+    shortDescription:"دراسة اللغات وآدابها وفنون الترجمة بين الثقافات المختلفة.",
+    description:"يعتمد على حس لغوي دقيق وحب حقيقي للغة، إلى جانب القدرة على نقل المعنى بأمانة بين لغتين مع الحفاظ على روح النص الأصلي.",
+    dimensions:{language:5, communication:3, creative:2},
+    strengths:["إتقان لغوي وحس لغوي دقيق","القدرة على نقل المعنى بين لغتين بأمانة","اهتمام حقيقي بالثقافات المختلفة"],
+    studyFocus:"لغويات، أدب، ترجمة تحريرية وفورية، دراسات ثقافية.",
+    careerExamples:["مترجم","معلم لغة","محرر محتوى","دبلوماسي (بعد مسارات إضافية)"],
+    warnings:["يحتاج ممارسة لغوية يومية مستمرة وليس فقط دراسة أكاديمية","فرص العمل تتحسن كثيرًا مع إتقان أكثر من لغة أجنبية"],
+    relatedMajors:["media","law"],
+    compare:{study:"نظري لغوي مع تطبيق ترجمي عملي", focus:"إتقان اللغة ونقل المعنى بدقة", programming:"منخفض", math:"منخفض", projects:"متوسط", workNature:"مكتبي غالبًا، عمل فردي مركّز"}
+  },
+  {
+    id:"architecture", name:"العمارة", category:"هندسة وتصميم",
+    shortDescription:"تصميم المباني والفراغات بشكل يجمع بين الجمال الوظيفي والمتانة الهندسية.",
+    description:"يمزج بين الفن والهندسة: تصور فراغ ثلاثي الأبعاد يخدم من يعيشون فيه، مع دقة تخطيط وحسابات إنشائية تضمن سلامته.",
+    dimensions:{creative:5, detailOriented:4, mathematical:2, practical:3, technical:2},
+    strengths:["حس بصري وفني مرتفع","القدرة على تصور الفراغ ثلاثي الأبعاد","دقة في التخطيط والتفاصيل الإنشائية"],
+    studyFocus:"تصميم معماري، تاريخ العمارة، رسم هندسي، برامج تصميم رقمي.",
+    careerExamples:["مهندس معماري","مصمم داخلي","مخطط حضري"],
+    warnings:["يتطلب ساعات عمل طويلة في الاستوديو ومراجعات تصميم متكررة","يجمع بين الفن والهندسة، وقد يكون مرهقًا لمن لا يستمتع بالنقد المستمر لعمله"],
+    relatedMajors:["civilEng","cs"],
+    compare:{study:"تطبيقي إبداعي مع استوديو تصميم مكثف", focus:"تصميم المباني والفراغات", programming:"منخفض إلى متوسط", math:"متوسط", projects:"مرتفع جدًا", workNature:"استوديو ومكتب، وأحيانًا مواقع بناء"}
+  }
+];
+
+/* ----------------------------- إدارة الحالة (State) ----------------------------- */
+const STORAGE_KEY = "takhassusi_state_v1";
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return null;
+    return JSON.parse(raw);
+  }catch(e){ return null; }
+}
+
+function saveState(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }catch(e){ /* تجاهل أخطاء التخزين بصمت (مثل وضع التصفح الخاص) */ }
+}
+
+let state = loadState() || {
+  screen:"home",        // home | payment | quiz | result
+  answers:{},            // {questionId: 1..5}
+  currentIndex:0,
+  paid:false,
+  finishedAt:null,
+  resultCache:null
+};
+
+function resetQuiz(keepPaidStatus){
+  state = {
+    screen:"home",
+    answers:{},
+    currentIndex:0,
+    paid: keepPaidStatus ? state.paid : false,
+    finishedAt:null,
+    resultCache:null
+  };
+  saveState();
+  render();
+}
+
+/* ----------------------------- منطق الدفع التجريبي ----------------------------- */
+// نقطة الاستبدال المستقبلية: عند توفر بوابة دفع حقيقية، استبدل محتوى mockPay
+// بطلب فعلي إلى مزوّد الدفع، ثم نفّذ verifyPayment للتأكد من نجاح العملية.
+function mockPay(){
+  state.paid = true;
+  state.screen = "quiz";
+  state.currentIndex = 0;
+  saveState();
+  render();
+}
+
+/* ----------------------------- منطق التسجيل والتنقل ----------------------------- */
+function answerQuestion(qid, value){
+  state.answers[qid] = value;
+  saveState();
+  render();
+}
+
+function goNext(){
+  if(state.currentIndex < QUESTIONS.length - 1){
+    state.currentIndex++;
+    saveState();
+    render();
+    window.scrollTo({top:0, behavior:"instant"});
+  } else {
+    finishQuiz();
+  }
+}
+
+function goPrev(){
+  if(state.currentIndex > 0){
+    state.currentIndex--;
+    saveState();
+    render();
+    window.scrollTo({top:0, behavior:"instant"});
+  }
+}
+
+function finishQuiz(){
+  state.resultCache = computeResults();
+  state.finishedAt = Date.now();
+  state.screen = "result";
+  saveState();
+  render();
+  window.scrollTo({top:0, behavior:"instant"});
+}
+
+/* ----------------------------- محرك التسجيل والتحليل (Scoring Engine) ----------------------------- */
+function computeDimensionScores(answers){
+  const scores = {};
+  Object.keys(DIMENSIONS).forEach(dim=>{
+    let raw = 0, maxAbs = 0;
+    QUESTIONS.forEach(q=>{
+      const w = q.dims && q.dims[dim];
+      if(!w) return;
+      maxAbs += w*2; // أقصى انحراف ممكن عن المنتصف (القيمة 3) هو 2
+      const val = answers[q.id];
+      if(val){
+        raw += w * (val - 3);
+      }
+    });
+    let normalized = 50;
+    if(maxAbs > 0){
+      normalized = ((raw + maxAbs) / (2*maxAbs)) * 100;
+    }
+    scores[dim] = {raw, maxAbs, normalized: Math.max(0, Math.min(100, normalized))};
+  });
+  return scores;
+}
+
+function computeMajorMatches(dimScores){
+  return MAJORS.map(major=>{
+    let weightSum = 0, weighted = 0;
+    Object.keys(major.dimensions).forEach(dim=>{
+      const w = major.dimensions[dim];
+      weightSum += w;
+      weighted += w * (dimScores[dim] ? dimScores[dim].normalized : 50);
+    });
+    const raw = weightSum > 0 ? (weighted/weightSum) : 50;
+    // تحويل النسبة الخام إلى "نسبة توافق تقديرية" أكثر واقعية بحيث لا تصل بسهولة إلى 100%
+    let displayed = Math.round(12 + (raw/100) * 82);
+    displayed = Math.max(8, Math.min(96, displayed));
+    return {major, raw, displayed};
+  }).sort((a,b)=> b.displayed - a.displayed);
+}
+
+const TRAIT_QUESTIONS = QUESTIONS.filter(q=>q.trait);
+function computeTraits(answers){
+  return TRAIT_QUESTIONS.map(q=>{
+    const val = answers[q.id] || 3;
+    let label;
+    if(val >= 4) label = q.traitHigh;
+    else if(val <= 2) label = q.traitLow;
+    else label = "متوازن بين الاثنين";
+    return {trait:q.trait, label};
+  });
+}
+
+function matchBandText(pct){
+  if(pct >= 90) return "توافق قوي جدًا";
+  if(pct >= 75) return "توافق قوي";
+  if(pct >= 60) return "توافق جيد";
+  if(pct >= 45) return "توافق متوسط";
+  return "توافق ضعيف نسبيًا";
+}
+
+function topDimensionsForMajor(major, dimScores, count){
+  const list = Object.keys(major.dimensions).map(dim=>({
+    dim, label:DIMENSIONS[dim],
+    contribution: major.dimensions[dim] * (dimScores[dim] ? dimScores[dim].normalized : 50)
+  }));
+  list.sort((a,b)=> b.contribution - a.contribution);
+  return list.slice(0, count);
+}
+
+function computeResults(){
+  const dimScores = computeDimensionScores(state.answers);
+  const matches = computeMajorMatches(dimScores);
+  const traits = computeTraits(state.answers);
+  return {dimScores, matches, traits};
+}
+
+/* ----------------------------- أيقونات SVG بسيطة ----------------------------- */
+const ICONS = {
+  list: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>',
+  layers: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>',
+  target: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>',
+  bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>',
+  heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>',
+  brain: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2a3.5 3.5 0 0 0-3.5 3.5v.6A3 3 0 0 0 4 9v1a3 3 0 0 0 1 2.2V14a3.5 3.5 0 0 0 3.5 3.5v0A2.5 2.5 0 0 0 11 15V4.5A2.5 2.5 0 0 0 9.5 2z"/><path d="M14.5 2a3.5 3.5 0 0 1 3.5 3.5v.6A3 3 0 0 1 20 9v1a3 3 0 0 1-1 2.2V14a3.5 3.5 0 0 1-3.5 3.5v0a2.5 2.5 0 0 1-2.5-2.5V4.5A2.5 2.5 0 0 1 14.5 2z"/></svg>',
+  tool: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 1 5.4-5.4l-3-3z"/></svg>',
+  briefcase: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+  warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>',
+  book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+  arrowLeft: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>'
+};
+
+/* ----------------------------- عرض الشاشات (Render Functions) ----------------------------- */
+const app = document.getElementById("app");
+
+function render(){
+  if(state.screen === "home") return renderHome();
+  if(state.screen === "payment") return renderPayment();
+  if(state.screen === "quiz") return renderQuiz();
+  if(state.screen === "result") return renderResult();
+}
+
+function heroArt(){
+  return `
+  <svg class="hero-art" viewBox="0 0 200 140" fill="none">
+    <path d="M20 110 C 60 40, 90 40, 100 70" stroke="#C7CDEA" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <path d="M180 110 C 140 40, 110 40, 100 70" stroke="#9FE0DA" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <path d="M60 118 C 80 90, 95 80, 100 70" stroke="#33418F" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <circle cx="20" cy="112" r="7" fill="#33418F"/>
+    <circle cx="180" cy="112" r="7" fill="#128C87"/>
+    <circle cx="60" cy="120" r="6" fill="#8A93C9"/>
+    <circle cx="100" cy="70" r="10" fill="#232D66"/>
+    <circle cx="100" cy="70" r="16" fill="none" stroke="#232D66" stroke-width="2" opacity="0.3"/>
+  </svg>`;
+}
+
+function renderHome(){
+  const hasProgress = Object.keys(state.answers).length > 0 && !state.finishedAt;
+  const hasResult = !!state.resultCache && !!state.finishedAt;
+
+  let resumeHtml = "";
+  if(hasProgress){
+    const answeredCount = Object.keys(state.answers).length;
+    resumeHtml = `
+      <div class="resume-banner">
+        <p>لديك اختبار غير مكتمل (أجبت عن ${answeredCount} من ${QUESTIONS.length} سؤالًا). هل تريد إكماله أم البدء من جديد؟</p>
+        <div class="resume-actions">
+          <button class="btn btn-primary btn-sm" style="flex:1" onclick="continueQuiz()">إكمال الاختبار</button>
+          <button class="btn btn-outline btn-sm" style="flex:1" onclick="confirmRestart()">البدء من جديد</button>
+        </div>
+      </div>`;
+  } else if(hasResult){
+    resumeHtml = `
+      <div class="resume-banner">
+        <p>لديك نتيجة محفوظة من اختبار سابق.</p>
+        <div class="resume-actions">
+          <button class="btn btn-primary btn-sm" style="flex:1" onclick="viewSavedResult()">عرض نتيجتي</button>
+          <button class="btn btn-outline btn-sm" style="flex:1" onclick="confirmRestart()">إعادة الاختبار</button>
+        </div>
+      </div>`;
+  }
+
+  app.innerHTML = `
+    <div class="screen-fade">
+      <div class="hero">
+        <div class="brand"><span class="brand-dot"></span> تخصصي</div>
+        ${heroArt()}
+        <h1>اختيار تخصصك <span>قرار كبير</span>.<br>خلّ إجاباتك تساعدك تشوف الصورة أوضح.</h1>
+        <p class="hero-sub">اختبار مبني على محاور متعددة — ميولك، طريقة تفكيرك، قدراتك الدراسية، وشخصيتك — يعطيك صورة تقديرية عن التخصصات الأقرب لك، لا حكمًا نهائيًا.</p>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-item">${ICONS.list}<span class="f-num">+48</span><span class="f-label">سؤالًا متنوعًا</span></div>
+        <div class="feature-item">${ICONS.layers}<span class="f-num">متعدد</span><span class="f-label">تحليل الأبعاد</span></div>
+        <div class="feature-item">${ICONS.target}<span class="f-num">5</span><span class="f-label">تخصصات مقترحة</span></div>
+        <div class="feature-item">${ICONS.bolt}<span class="f-num">فوري</span><span class="f-label">عرض النتيجة</span></div>
+      </div>
+
+      ${resumeHtml}
+
+      <div class="home-section">
+        <h2>كيف يحلل الاختبار إجاباتك؟</h2>
+        <p class="sec-sub">بدل التركيز على مادة دراسية واحدة تحبها، يغطي الاختبار محاور مختلفة تُبنى منها صورتك الكاملة.</p>
+        <div class="axis-list">
+          <div class="axis-row"><div class="a-icon">${ICONS.heart}</div><div class="a-text"><b>الميول والاهتمامات</b><span>ما الذي يشدّ انتباهك فعلًا؟</span></div></div>
+          <div class="axis-row"><div class="a-icon">${ICONS.brain}</div><div class="a-text"><b>طريقة التفكير</b><span>تحليلي، إبداعي، نقدي، أم عملي؟</span></div></div>
+          <div class="axis-row"><div class="a-icon">${ICONS.book}</div><div class="a-text"><b>القدرات الدراسية</b><span>الرياضيات، العلوم، اللغة، الحفظ...</span></div></div>
+          <div class="axis-row"><div class="a-icon">${ICONS.target}</div><div class="a-text"><b>الشخصية</b><span>فردي أم جماعي، مستقر أم متنوع؟</span></div></div>
+          <div class="axis-row"><div class="a-icon">${ICONS.briefcase}</div><div class="a-text"><b>طبيعة العمل المستقبلية</b><span>مكتب أم ميدان، تقني أم إنساني؟</span></div></div>
+          <div class="axis-row"><div class="a-icon">${ICONS.tool}</div><div class="a-text"><b>التقنية والبرمجة</b><span>قياس دقيق يفرّق بين تخصصات التقنية المختلفة</span></div></div>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <div class="p-label">اختبار «تخصصي» الكامل</div>
+        ${FREE_PROMOTION ? `
+          <div class="p-amount"><span style="text-decoration:line-through;opacity:0.55;font-size:20px;">2 د.ل</span> &nbsp; مجاني الآن</div>
+          <div class="p-promo-note">لفترة محدودة فقط</div>
+        ` : `
+          <div class="p-amount">2 د.ل <small>فقط</small></div>
+        `}
+        <button class="btn" style="background:#fff;color:var(--primary);" onclick="startFlow()">ابدأ الاختبار</button>
+      </div>
+
+      <div class="disclaimer">
+        ${ICONS.warn.replace('viewBox="0 0 24 24"','viewBox="0 0 24 24" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;margin-left:4px;"')}
+        هذا الاختبار أداة إرشادية عامة لمساعدتك على التفكير في خياراتك، وليس حكمًا نهائيًا أو بديلًا عن استشارة مرشد أكاديمي. النِّسب المعروضة تقديرية وليست دقيقة بشكل مطلق.
+      </div>
+
+      <p class="footer-note">تخصصي — نسخة تجريبية (Beta) لمساعدة الطلاب في ليبيا</p>
+    </div>
+  `;
+}
+
+function startFlow(){
+  if(FREE_PROMOTION || state.paid){
+    state.paid = true;
+    state.screen = "quiz";
+  } else {
+    state.screen = "payment";
+  }
+  saveState();
+  render();
+}
+
+function continueQuiz(){
+  state.screen = "quiz";
+  saveState();
+  render();
+}
+
+function viewSavedResult(){
+  state.screen = "result";
+  saveState();
+  render();
+}
+
+function confirmRestart(){
+  if(confirm("سيتم مسح إجاباتك الحالية والبدء من جديد. هل أنت متأكد؟")){
+    resetQuiz(true);
+  }
+}
+
+function goHome(){
+  state.screen = "home";
+  saveState();
+  render();
+}
+
+function renderPayment(){
+  app.innerHTML = `
+    <div class="screen-fade">
+      <div class="topbar">
+        <button class="back-btn" onclick="goHome()">${ICONS.arrowLeft}</button>
+        <h3>إتمام الدفع</h3>
+      </div>
+
+      <div class="pay-card">
+        <span class="pay-badge">${ICONS.warn.replace('viewBox="0 0 24 24"','viewBox="0 0 24 24" style="width:14px;height:14px;"')} دفع تجريبي أثناء التطوير</span>
+        <div class="pay-row"><span>المنتج</span><span>اختبار تخصصي الكامل</span></div>
+        <div class="pay-row"><span>عدد الأسئلة</span><span>${QUESTIONS.length} سؤالًا</span></div>
+        <div class="pay-row"><span>عدد التخصصات المقترحة</span><span>أفضل 5 تخصصات</span></div>
+        <div class="pay-total"><span>الإجمالي</span><span>2.00 د.ل</span></div>
+      </div>
+
+      <div class="pay-note">
+        هذه بوابة دفع <b>تجريبية (Mock)</b> لأغراض التطوير فقط، ولن يتم خصم أي مبلغ حقيقي من حسابك عند الضغط على زر التأكيد. سيتم استبدالها ببوابة دفع حقيقية قبل الإطلاق النهائي للموقع.
+      </div>
+
+      <div class="pay-actions">
+        <button class="btn btn-primary" onclick="mockPay()">تأكيد الدفع (تجريبي) — 2 د.ل</button>
+        <button class="btn btn-ghost" style="width:100%;text-align:center;justify-content:center;" onclick="goHome()">إلغاء والعودة</button>
+      </div>
+
+      <p class="footer-note">لن يُطلب منك دفع فعلي في هذه النسخة التجريبية من الموقع.</p>
+    </div>
+  `;
+}
+
+function renderQuiz(){
+  const q = QUESTIONS[state.currentIndex];
+  const answeredVal = state.answers[q.id];
+  const pct = Math.round(((state.currentIndex) / QUESTIONS.length) * 100);
+  const isLast = state.currentIndex === QUESTIONS.length - 1;
+
+  let scaleButtons = "";
+  for(let i=1;i<=5;i++){
+    scaleButtons += `<button class="scale-btn ${answeredVal===i?'selected':''}" onclick="answerQuestion(${q.id}, ${i})" aria-label="${SCALE_LABELS[i-1]}">${i}</button>`;
+  }
+
+  app.innerHTML = `
+    <div class="screen-fade">
+      <div class="quiz-header">
+        <div class="quiz-header-top">
+          <span class="qh-count">السؤال ${state.currentIndex+1} من ${QUESTIONS.length}</span>
+          <span class="qh-section">${q.section}</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+      </div>
+
+      <div class="q-card">
+        <p class="q-text">${q.text}</p>
+        <div class="scale">${scaleButtons}</div>
+        <div class="scale-labels"><span>${SCALE_LABELS[0]}</span><span>${SCALE_LABELS[4]}</span></div>
+      </div>
+
+      <div class="quiz-nav">
+        <button class="btn btn-outline" onclick="goPrev()" ${state.currentIndex===0?'disabled':''}>السابق</button>
+        <button class="btn btn-primary" onclick="goNext()" ${!answeredVal?'disabled':''}>${isLast?'عرض النتيجة':'التالي'}</button>
+      </div>
+
+      <p class="footer-note">يتم حفظ تقدمك تلقائيًا — يمكنك إغلاق الصفحة والعودة لاحقًا لإكمال الاختبار.</p>
+    </div>
+  `;
+}
+
+function renderResult(){
+  const {matches, traits} = state.resultCache;
+  const top = matches[0];
+  const others = matches.slice(1,5);
+  const [first, second] = matches;
+
+  const strengthsHtml = top.major.strengths.map(s=>`<li>${s}</li>`).join("");
+  const warningsHtml = top.major.warnings.map(s=>`<li>${s}</li>`).join("");
+  const careersHtml = top.major.careerExamples.map(c=>`<span class="chip">${c}</span>`).join("");
+  const topDims = topDimensionsForMajor(top.major, state.resultCache.dimScores, 3);
+  const whyHtml = topDims.map(d=>`<li>مستوى مرتفع في محور «${d.label}» ضمن إجاباتك</li>`).join("");
+
+  const othersHtml = others.map((m,idx)=>`
+    <div class="minor-card">
+      <div class="minor-rank">${idx+2}</div>
+      <div class="minor-info"><b>${m.major.name}</b><span>${m.major.shortDescription}</span></div>
+      <div class="minor-pct">${m.displayed}%</div>
+    </div>
+  `).join("");
+
+  const compareRows = [
+    ["نوع الدراسة","study"],
+    ["التركيز","focus"],
+    ["البرمجة","programming"],
+    ["الرياضيات","math"],
+    ["المشاريع العملية","projects"],
+    ["طبيعة العمل","workNature"]
+  ].map(([label,key])=>`
+    <div class="ct-row">
+      <div class="ct-label">${label}</div>
+      <div class="ct-val">${first.major.compare[key]}</div>
+      <div class="ct-val">${second.major.compare[key]}</div>
+    </div>
+  `).join("");
+
+  app.innerHTML = `
+    <div class="screen-fade">
+      <div class="result-hero">
+        <span class="r-eyebrow">اكتملت نتيجتك</span>
+        <h2>هذه أقرب التخصصات إلى إجاباتك</h2>
+      </div>
+
+      <div class="match-card">
+        <div class="match-top">
+          <div class="match-ring"><b>${top.displayed}%</b><span>تقديري</span></div>
+          <div>
+            <h3>${top.major.name}</h3>
+            <div class="match-band">${matchBandText(top.displayed)}</div>
+            <span class="match-cat">${top.major.category}</span>
+          </div>
+        </div>
+        <div class="match-body">
+          <p class="match-desc">${top.major.description}</p>
+
+          <div class="m-block">
+            <h4>${ICONS.target}لماذا ظهر هذا التخصص لك؟</h4>
+            <ul class="m-list">${whyHtml}</ul>
+          </div>
+
+          <div class="m-block">
+            <h4>${ICONS.bolt}نقاط القوة المرتبطة به</h4>
+            <ul class="m-list">${strengthsHtml}</ul>
+          </div>
+
+          <div class="m-block">
+            <h4>${ICONS.warn}انتبه لهذا قبل اختياره</h4>
+            <ul class="m-list warn">${warningsHtml}</ul>
+          </div>
+
+          <div class="m-block">
+            <h4>${ICONS.book}نوع الدراسة باختصار</h4>
+            <div class="study-focus-box">${top.major.studyFocus}</div>
+          </div>
+
+          <div class="m-block" style="margin-bottom:0;">
+            <h4>${ICONS.briefcase}أمثلة على مجالات العمل مستقبلًا</h4>
+            <div class="chip-row">${careersHtml}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="other-majors">
+        <h3>تخصصات أخرى مناسبة لك</h3>
+        ${othersHtml}
+      </div>
+
+      <div class="compare-section">
+        <h3>محتار بين تخصصين؟</h3>
+        <p class="cs-sub">مقارنة سريعة بين أفضل تخصصين ظهرا في نتيجتك لمساعدتك على الحسم.</p>
+        <div class="compare-head">
+          <div class="ch-item"><b>${first.major.name}</b><span>${first.displayed}%</span></div>
+          <div class="ch-item"><b>${second.major.name}</b><span>${second.displayed}%</span></div>
+        </div>
+        <div class="compare-table">
+          <div class="ct-row">
+            <div class="ct-label">المحور</div>
+            <div class="ct-val" style="font-weight:700;">${first.major.name}</div>
+            <div class="ct-val" style="font-weight:700;">${second.major.name}</div>
+          </div>
+          ${compareRows}
+        </div>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn btn-outline" onclick="confirmRestart()">إعادة الاختبار من جديد</button>
+      </div>
+
+      <p class="footer-note">تذكّر: هذه نتيجة إرشادية تقديرية تساعدك على التفكير، وليست قرارًا نهائيًا. يُنصح دائمًا باستشارة مرشد أكاديمي أو أشخاص يعملون فعلًا في التخصص قبل الحسم.</p>
+    </div>
+  `;
+}
+
+/* ----------------------------- بدء التشغيل ----------------------------- */
+render();
+</script>
+</body>
+</html>
